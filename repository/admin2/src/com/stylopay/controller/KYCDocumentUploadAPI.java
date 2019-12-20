@@ -7,7 +7,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import com.stylopay.bean.Detailsbean;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,33 +16,33 @@ import org.springframework.stereotype.Controller;
 public class KYCDocumentUploadAPI {
 	
 	String documentData = null;
-	String username = Detailsbean.getusername();
+	String memberId = null;
 	String documentType = null;
 	
 	String jsonResponse = null;
 	String response = null;
 	
-	public String uploadKYCFile(String documentData, String username, String documentType) {
+	public String uploadKYCFile(String documentData, String memberId, String documentType) {
 		
 		this.documentData = documentData;
-		this.username = username;
+		this.memberId = memberId;
 		this.documentType = documentType;
 		
 		System.out.println("document type is: " + documentType);
 		
 		try {
 
-			URL url = new URL("http://developer.staging.stylopay.com/KYCServerDemo/API/KYC/UploadDocument");
+			URL url = new URL("http://35.180.75.185/StyloDemoWalletService/API/KYC/UploadDocument");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Content-Type", "application/json");
 			conn.setRequestProperty("Authorization", "asdfghjklLKJHGFDSA");
 
-			String input = "{\"Application_ID\":\"1\", \"DocumentData\":\"" + documentData + "\", \"DocumentReference\":\"ID\", \"DocumentType\":\"" + documentType + "\", \"username\":\"" + username + "\"}";
+			String input = "{\"Application_ID\":\"1\", \"DocumentData\":\"" + documentData + "\", \"DocumentReference\":\"ID\", \"DocumentType\":\"" + documentType + "\", \"MemberID\":\"" + memberId + "\"}";
 						
 			
-			System.out.println("KYC Upload Document API Json input is: " + input);
+			//System.out.println("KYC Upload Document API Json input is: " + input);
 
 			OutputStream os = conn.getOutputStream();
 			os.write(input.getBytes());

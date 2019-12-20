@@ -2,18 +2,18 @@ package com.stylopay.bean;
 
 public class Detailsbean {
 	
-	 static String username;
+	private String UserID;
 	
 //	private String AccID;
 //	private String CardNo;
 //	private String First;
 //	private String Last;
 	
-	public static String getusername() {
-		return username;
+	public String getMemberID() {
+		return UserID;
 	}
-	public void setusername(String username) {
-		this.username = username;
+	public void setMemberID(String UserID) {
+		this.UserID = UserID;
 	}
 //	public String getAccID() {
 //		return AccID;

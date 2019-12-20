@@ -754,7 +754,7 @@ document.addEventListener("click", closeAllSelect);
                             <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
                                 <div class="main-card mb-3 card">
                                     <div class="card-body"> <!---<h5 class="card-title">Rows</h5>--->
-                                         <form class=""   method=POST   action="/admin2/kycupload" modelAttribute="uploadFiles" enctype="multipart/form-data" ">
+                                         <form class="">
                                             <div class="form-row">
                                                 <div class="col-md-2">
                                                     <div class="position-relative form-group"><label for="username" class="">User Name</label><input name="User Name" id="username" onchange="getdetails(this.value)" placeholder="User Name" type="username" class="form-control"></div>
@@ -775,19 +775,19 @@ document.addEventListener("click", closeAllSelect);
                                            
                                             <div class="form-row">
                                                 <div class='col-md-3'>
-                                                   <div class="position-relative form-group"><label for="exampleAddress1" class="">Account ID</label><input name="accountid" id="accountid" placeholder="Account ID" type="text" class="form-control"    disabled></div>
+                                                   <div class="position-relative form-group"><label for="accountid" class="">Account ID</label><input name="accountid" id="accountid" placeholder="Account ID" type="text" class="form-control"    disabled></div>
                                                     </div>
                                                     </br></br></br></br>
                                                     <div class="col-md-2">
-                                                    <div class="position-relative form-group"><label for="exampleAddress2" class="">First name</label><input name="address2" id="fname" placeholder="First name" type="text" class="form-control"  disabled>
+                                                    <div class="position-relative form-group"><label for="exampleAddress2" class="">First name</label><input name="address2" id="exampleAddress2" placeholder="First name" type="text" class="form-control"  disabled>
                                                     </div>
                                                     </div>
                                                 <div class="col-md-2">
-                                                    <div class="position-relative form-group"><label for="exampleCity" class="">last Name</label><input name="city"  id="lname" placeholder="Last Name" type="text" class="form-control"  disabled></div>
+                                                    <div class="position-relative form-group"><label for="exampleCity" class="">last Name</label><input name="city"  id="exampleCity" placeholder="Last Name" type="text" class="form-control"  disabled></div>
                                                 </div>
 
                                                   <div class="col-md-3">
-                                                    <div class="position-relative form-group"><label for="userpemissiongroup" class="">User Permission Group</label><input name="userpermissiongroup"  id="userpermissiongroup" placeholder="User Permission Group" type="text" class="form-control"  disabled></div>
+                                                    <div class="position-relative form-group"><label for="userpemissiongroup" class="">User Permission Group</label><input name="userpemissiongroup"  id="userpemissiongroup" placeholder="User Permission Group" type="text" class="form-control"  disabled></div>
                                                 </div>
                                                 <!---<div class="col-md-2">
                                                     <div class="position-relative form-group"><label for="exampleState" class="">State</label><input name="state" id="exampleState" type="text" class="form-control"></div>
@@ -815,23 +815,23 @@ Remember to set the width: -->
       </div> </lable>
 
 
-  </br>
+    </br>
     </br>                   
-                        <div class="position-relative form-group"><label for="exampleFile" class="">ID Proof  [Front Side]</label><input name="files" id="fileupload1" type="file" class="form-control-file">
+                       <div class="position-relative form-group"><label for="exampleFile" class="">ID Proof  [Front Side]</label><input name="file" id="exampleFile" type="file" class="form-control-file">
                                                         <small class="form-text text-muted">File Type : .jpg,.jpeg,.png,.pdf.  </small>
                                                     </div>
 
 </br>
 
 
-<div class="position-relative form-group"><label for="exampleFile" class="">ID Proof [Back Side]</label><input name="files" id="fileupload2" type="file" class="form-control-file">
+<div class="position-relative form-group"><label for="exampleFile" class="">ID Proof [Back Side]</label><input name="file" id="exampleFile" type="file" class="form-control-file">
     <small class="form-text text-muted">File Type : .jpg,.jpeg,.png,.pdf.  </small>
 </div>
 
 
 </br>
 
-                                                     <div class="position-relative form-group"><label for="exampleFile" class="">Proof Of Address</label><input name="files" id="fileupload3" type="file" class="form-control-file">
+                                                     <div class="position-relative form-group"><label for="exampleFile" class="">Proof Of Address</label><input name="file" id="exampleFile" type="file" class="form-control-file">
                                                         <small class="form-text text-muted">File Type : .jpg,.jpeg,.png,.pdf.</small>
                                                     </div>
 
@@ -841,122 +841,8 @@ Remember to set the width: -->
 
                                             <div class="position-relative form-check"><input name="check" id="exampleCheck" type="checkbox" class="form-check-input"><label for="exampleCheck" class="form-check-label">Confirm</label></div>
 
- 
-                                            <input type="submit" class="mt-2 btn btn-primary"  value="Submit"> 
-                                            
-                                            
-                                            
-                                            
-                                            
-                       <!--                      
-                        <h2 class="fs-title">Upload Documents</h2>
-									<h3 class="fs-subtitle">We will never sell it</h3>
-									<input type="file" name="files" placeholder="ID Front" id="idFront"/>
-									<input type="file" name="files" placeholder="ID Back" id="idBack"/>
-									<input type="file" name="files" placeholder="Proof Of Address" id="poa"/>
-									<textarea name="address" placeholder="Address"></textarea>
-									<h2 class="fs-title">Upload Documents</h2>
-									<label style="font-size:0.7em" for="file-upload" class="custom-file-upload">
-									<i class="fa fa-cloud-upload"></i> ID Proof Document (Front)
-									</label>
-									<select required name="state" id="State" class="">
-									<option value="">Select ID Type</option>
-									<option value="">Passport</option>
-									<option value="">Driver's Licence</option>
-									<option value="">National ID</option>
-									</select>	
-									</select>	
-									<input id="fileupload1" type="file" name="files" placeholder="ID Front" onchange="return validate_fileupload(this.value, this.id)" accept="image/x-png,application/pdf,image/jpeg"/>
-									<label style="font-size:0.7em" for="file-upload" class="custom-file-upload">
-									<i class="fa fa-cloud-upload"></i> ID Proof Document (Back)
-									</label>
-									<input id="fileupload2" type="file" required name="files" placeholder="ID  Back" onchange="return validate_fileupload(this.value, this.id)" accept="image/x-png,application/pdf,image/jpeg"/>
-									<label style="font-size:0.7em" for="file-upload" class="custom-file-upload">
-									<i class="fa fa-cloud-upload">	</i> POA Document
-									</label>
-									<select name="state" id="State" class="">
-									<option value="">Select Address Proof Type</option>
-									<option value="">Utility Bill(*Less than 60days)</option>
-									<option value="">Bank statements(*Less than 60days)</option>
-									<option value="">Driver's Licence</option>
-									<option value="">Lease agreement registered with the competent tax authority.</option>
-									</select>
-									<input id="fileupload3" type="file" name="files" placeholder="POA"  required onchange="return validate_fileupload(this.value, this.id)" accept="image/x-png,application/pdf,image/jpeg"/>
-									<input type="button" name="previous" class="previous action-button" value="Previous" />
-									<input type="submit" name="submit" class="next action-button" value="Submit" />                
-                                              -->
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                      <!-- test form -->     
-                                            
-                                            
-                                            <!-- <form id="msform" method="post" action="/kycUpload" modelAttribute="uploadFiles" enctype="multipart/form-data" ">
 
-									<fieldset>
-									<h2 class="fs-title">Upload Documents</h2>
-									<h3 class="fs-subtitle">We will never sell it</h3>
-									<input type="file" name="files" placeholder="ID Front" id="idFront"/>
-									<input type="file" name="files" placeholder="ID Back" id="idBack"/>
-									<input type="file" name="files" placeholder="Proof Of Address" id="poa"/>
-									<textarea name="address" placeholder="Address"></textarea>
-									<h2 class="fs-title">Upload Documents</h2>
-									<label style="font-size:0.7em" for="file-upload" class="custom-file-upload">
-									<i class="fa fa-cloud-upload"></i> ID Proof Document (Front)
-									</label>
-									<select required name="state" id="State" class="">
-									<option value="">Select ID Type</option>
-									<option value="">Passport</option>
-									<option value="">Driver's Licence</option>
-									<option value="">National ID</option>
-									</select>	
-									</select>	
-									<input id="fileupload1" type="file" name="files" placeholder="ID Front" onchange="return validate_fileupload(this.value, this.id)" accept="image/x-png,application/pdf,image/jpeg"/>
-									<label style="font-size:0.7em" for="file-upload" class="custom-file-upload">
-									<i class="fa fa-cloud-upload"></i> ID Proof Document (Back)
-									</label>
-									<input id="fileupload2" type="file" required name="files" placeholder="ID  Back" onchange="return validate_fileupload(this.value, this.id)" accept="image/x-png,application/pdf,image/jpeg"/>
-									<label style="font-size:0.7em" for="file-upload" class="custom-file-upload">
-									<i class="fa fa-cloud-upload">	</i> POA Document
-									</label>
-									<select name="state" id="State" class="">
-									<option value="">Select Address Proof Type</option>
-									<option value="">Utility Bill(*Less than 60days)</option>
-									<option value="">Bank statements(*Less than 60days)</option>
-									<option value="">Driver's Licence</option>
-									<option value="">Lease agreement registered with the competent tax authority.</option>
-									</select>
-									<input id="fileupload3" type="file" name="files" placeholder="POA"  required onchange="return validate_fileupload(this.value, this.id)" accept="image/x-png,application/pdf,image/jpeg"/>
-									<input type="button" name="previous" class="previous action-button" value="Previous" />
-									<input type="submit" name="submit" class="next action-button" value="Submit" />
-									</fieldset>
-									</form> -->
-                                             
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
+                                            <button class="mt-2 btn btn-primary">Submit</button>
                                         </form>
                                     </div>
                                 </div>
@@ -1470,14 +1356,6 @@ Remember to set the width: -->
     </div>
     <script type="text/javascript" src="assets/scripts/dashboard.js"></script>
     <script type="text/javascript" src="assets/scripts/Details.js"></script>
-    <!-- <script type="text/javascript" src="assets/scripts/jquery.min.js"></script> -->
-    <!-- <script type="text/javascript" src="assets/scripts/jquery-3.2.1.min.js"></script> -->
-    <script type="text/javascript" src="assets/scripts/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="assets/scripts/intlTelInput.js"></script>
-     <script type="text/javascript" src="assets/scripts/less.min.js"></script>
-      <script type="text/javascript" src="assets/scripts/bootstrap.min.js"></script>
-      
-    
     
     </body>
 </html>

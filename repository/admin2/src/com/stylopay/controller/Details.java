@@ -24,11 +24,11 @@ public class Details {
 	String response = null;
 	String responseMsg = null;
 	
-	public String details(String username) throws JSONException {
+	public String details(String MemberID) throws JSONException {
 		
 		
 		
-		String UserName = username;
+		String UserID = MemberID;
 //		String AccountID = AccID;
 //		String CardNumber = CardNo;
 //		String FirstName = First;
@@ -40,17 +40,17 @@ public class Details {
 		
 		try {
 
-			URL url = new URL(" http://developer.staging.stylopay.com/StyloDemoWalletService/API/CommonServices/GetUser_Details ");
+			URL url = new URL("  ");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Content-Type", "application/json");
 			conn.setRequestProperty("Authorization", "asdfghjklLKJHGFDSA");
 
-			String input = "{\"Application_ID\":1,\"username\":	\"" + username + "\"}";
+			String input = "{\"Application_ID\":1,\"MemeberID\":}";
 						
 			
-			System.out.println("  get user API Json input is: " + input);
+			System.out.println(" API Json input is: " + input);
 
 			OutputStream os = conn.getOutputStream();
 			os.write(input.getBytes());
@@ -61,7 +61,7 @@ public class Details {
 					(conn.getInputStream())));
 			
 
-			System.out.println("  get user API Json Response is - ");
+			System.out.println(" API Json Response is - ");
 			while ((jsonResponse = br.readLine())!= null) {	
 				System.out.println(jsonResponse);
 				
@@ -69,30 +69,30 @@ public class Details {
 				
 			}
 			
-//			if(response!=null){
-//				
-//				
-//						JSONObject jsonResponse = new JSONObject(response);
-//						
-//						if(jsonResponse.toString().contains("error") || !jsonResponse.toString().contains("success")) {
-//							
-//								if(jsonResponse.toString().contains("description")) {
-//									responseMsg = jsonResponse.getString("description");
-//									
-//									System.out.println("responseMsg is: " + responseMsg);
-//							   }else {
-//								   
-//								   responseMsg = "Unknown error!";
-//								   
-//							   }
-//							
-//						}
-//				
-//			}else {
-//				
-//				responseMsg = "Unknown error!";
-//				
-//			}
+			if(response!=null){
+				
+				
+						JSONObject jsonResponse = new JSONObject(response);
+						
+						if(jsonResponse.toString().contains("error") || !jsonResponse.toString().contains("success")) {
+							
+								if(jsonResponse.toString().contains("description")) {
+									responseMsg = jsonResponse.getString("description");
+									
+									System.out.println("responseMsg is: " + responseMsg);
+							   }else {
+								   
+								   responseMsg = "Unknown error!";
+								   
+							   }
+							
+						}
+				
+			}else {
+				
+				responseMsg = "Unknown error!";
+				
+			}
 			
 			
 			
@@ -110,12 +110,7 @@ public class Details {
 		  }			
 		
 		
-		return response;
-	}
-
-	public static String getdetails(Object user_permission_group, Object first_name, Object last_name, Object id) {
-		// TODO Auto-generated method stub
-		return null;
+		return responseMsg;
 	}
 
 }
