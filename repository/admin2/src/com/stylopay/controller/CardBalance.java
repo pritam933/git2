@@ -7,43 +7,38 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import com.stylopay.bean.Detailsbean;
 
-import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.stereotype.Controller;
 
-@Controller
-public class KYCDocumentUploadAPI {
+public class CardBalance {
 	
-	String documentData = null;
-	String username = Detailsbean.getusername();
-	String documentType = null;
+	String userId = null;
+	String accountId = null;
+	String cardNum = null;
 	
 	String jsonResponse = null;
 	String response = null;
 	
-	public String uploadKYCFile(String documentData, String username, String documentType) {
+	public String clxCardBalanceAPI(String userId, String accountId) throws JSONException{
 		
-		this.documentData = documentData;
-		this.username = username;
-		this.documentType = documentType;
+		this.userId = userId;
+		this.accountId = accountId;		
 		
-		System.out.println("document type is: " + documentType);
 		
 		try {
 
-			URL url = new URL("http://developer.staging.stylopay.com/KYCServerDemo/API/KYC/UploadDocument");
+			URL url = new URL("http://35.180.75.185/StyloDemoApiServer/API/Transactions/Balance");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoOutput(true);
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Content-Type", "application/json");
 			conn.setRequestProperty("Authorization", "asdfghjklLKJHGFDSA");
 
-			String input = "{\"Application_ID\":\"1\", \"DocumentData\":\"" + documentData + "\", \"DocumentReference\":\"ID\", \"DocumentType\":\"" + documentType + "\", \"username\":\"" + username + "\"}";
+			String input = "{\"Application_ID\":\"1\", \"UserId\":\"" + userId + "\", \"AccountId\":\"" + accountId + "\"}";
 						
 			
-			System.out.println("KYC Upload Document API Json input is: " + input);
+			System.out.println("ClxCardInformation API Json input is: " + input);
 
 			OutputStream os = conn.getOutputStream();
 			os.write(input.getBytes());
@@ -54,16 +49,15 @@ public class KYCDocumentUploadAPI {
 					(conn.getInputStream())));
 			
 
-			System.out.println("KYC Upload Document API Json Response is - ");
+			System.out.println("ClxCardInformation API Json Response is - ");
 			while ((jsonResponse = br.readLine())!= null) {	
 				System.out.println(jsonResponse);
 				
-				response = jsonResponse;		
-				
-				
+				response = jsonResponse;				
+			
 			}
 			
-
+			
 			//conn.disconnect();
 
 		  } catch (MalformedURLException e) {
@@ -77,8 +71,8 @@ public class KYCDocumentUploadAPI {
 		 }			
 		
 		
-		return response;
 		
+		return response;
 	}
 
 }

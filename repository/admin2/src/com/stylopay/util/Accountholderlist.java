@@ -9,24 +9,21 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.json.JSONException;
-//import org.json.JSONObject;
-//import org.json.JSONObject;
+import org.json.JSONObject;
 
 public class Accountholderlist {
 	
-	Accountholderlist  Accountholdersbean;
-	
-	String Admin_Agent_code = null;
-	String Admin_Sub_Agent_code = null;
+	String AdminAgentcode = null;
+	String AdminSubAgentcode = null;
 //	String cardNum = null;
 	
 	String jsonResponse = null;
 	String response = null;
 	
-	public String getcardholdersAPI( String admin_Agent_code, String admin_Sub_Agent_code) throws JSONException{
+	public String getcardholdersAPI( String AdminSubAgentcode, String AdminAgentcode) throws JSONException{
 		
-		this.Admin_Agent_code = admin_Agent_code;
-		this.Admin_Sub_Agent_code = admin_Sub_Agent_code;		
+		this.AdminAgentcode = AdminAgentcode;
+		this.AdminSubAgentcode = AdminSubAgentcode;		
 		
 		
 		try {
@@ -38,7 +35,7 @@ public class Accountholderlist {
 			conn.setRequestProperty("Content-Type", "application/json");
 			conn.setRequestProperty("Authorization", "asdfghjklLKJHGFDSA");
 
-			String input = "{\"Application_ID\":\"1\", \"Admin_Agent_code\":\"" + admin_Agent_code + "\", \"Admin_Sub_Agent_code\":\"" + admin_Sub_Agent_code + "\"}";
+			String input = "{\"Application_ID\":\"1\", \"Admin_Agent_code\":\"" + AdminAgentcode + "\", \"Admin_Sub_Agent_code\":\"" + AdminSubAgentcode + "\"}";
 						
 			
 			System.out.println("Getcardholders API Json input is: " + input);
@@ -57,21 +54,20 @@ public class Accountholderlist {
 				System.out.println(jsonResponse);
 				
 				response = jsonResponse;	
+				
+				
+				JSONObject jsonreponse = new JSONObject(response);
+				
+				//System.out.println(((JSONObject)jsonreponse.get("Status")).get("Code").toString().equals("0"));
+				if (((JSONObject)jsonreponse.get("Status")).get("Code").toString().equals("0")  &&  ((JSONObject)jsonreponse.get("UserData")).get("User_Agent_code").toString().equals("192")) {
+					
+			
+				
+				return ("Dashboard");}
+				else {
+					return ("login");
+				}
 
-				
-				
-//				JSONObject jsonreponse = new JSONObject(response);
-//		
-//			System.out.println(((JSONObject)jsonreponse.get("Status")).get("Code").toString().equals("0"));
-//			if (((JSONObject)jsonreponse.get("Status")).get("Code").toString().equals("0")  &&  ((JSONObject)jsonreponse.get("UserData")).get("User_Agent_code").toString().equals("192")) {
-//				
-//		
-//				
-//				return ("accountholders");}
-//				else {
-//					return null;
-//				}
-//
 			}
 			
 			
@@ -91,5 +87,5 @@ public class Accountholderlist {
 		
 		return response;
 	}
-	
+
 }

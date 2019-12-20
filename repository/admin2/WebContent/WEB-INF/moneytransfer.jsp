@@ -775,7 +775,7 @@ document.addEventListener("click", closeAllSelect);
                                            
                                             <div class="form-row">
                                                 <div class='col-md-3'>
-                                                   <div class="position-relative form-group"><label for="exampleAddress1" class="">Account ID</label><input name="accountid" id="accountid" placeholder="Account ID" type="text" class="form-control"    disabled></div>
+                                                   <div class="position-relative form-group"><label for="accountid" class="">Account ID</label><input name="accountid" id="accountid" placeholder="Account ID" type="text" class="form-control"    disabled></div>
                                                     </div>
                                                     </br></br></br></br>
                                                     <div class="col-md-2">
@@ -787,7 +787,7 @@ document.addEventListener("click", closeAllSelect);
                                                 </div>
 
                                                   <div class="col-md-3">
-                                                    <div class="position-relative form-group"><label for="userpemissiongroup" class="">User Permission Group</label><input name="userpermissiongroup"  id="userpermissiongroup" placeholder="User Permission Group" type="text" class="form-control"  disabled></div>
+                                                    <div class="position-relative form-group"><label for="userpemissiongroup" class="">User Permission Group</label><input name="userpemissiongroup"  id="userpemissiongroup" placeholder="User Permission Group" type="text" class="form-control"  disabled></div>
                                                 </div>
                                                 <!---<div class="col-md-2">
                                                     <div class="position-relative form-group"><label for="exampleState" class="">State</label><input name="state" id="exampleState" type="text" class="form-control"></div>

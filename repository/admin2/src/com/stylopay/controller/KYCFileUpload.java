@@ -1,4 +1,4 @@
-package com.stylopay.bean;
+package com.stylopay.controller;
 
 import java.util.List;
 

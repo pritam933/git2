@@ -1,16 +1,18 @@
 package com.stylopay.controller;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.codec.binary.Base64;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,21 +20,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.amazonaws.services.alexaforbusiness.model.UserData;
-import com.stylopay.bean.Accountholdersbean;
 import com.stylopay.bean.Loginbean;
-import com.stylopay.util.Accountholderlist;
+
+import com.stylopay.bean.Detailsbean;
+
 import com.stylopay.util.Loginutil;
+
+
 
 @Controller
 public class AdminController {
 	
-	private String admin_Agent_code= "";
-	private String admin_Sub_Agent_code="";
-	Accountholdersbean accountholder = new Accountholdersbean();
-	private String msg;
+	//String username = "ab123";
+	
+	@Autowired
+	ServletContext context;
+	
+	/////////////////////////////////////login/////////////////////////////////////
 
 	
 	@RequestMapping(value ="/login")
@@ -54,28 +61,24 @@ public class AdminController {
 		String password = loginbean.getPass();
 		String response =login.login(email, password);
 		JSONObject jsonreponse = new JSONObject(response);
-		String UserData=jsonreponse.get("UserData").toString();
-		JSONObject jsonreponse1 = new JSONObject(UserData);
-		System.out.println("agentcode"+jsonreponse1.get("Admin_Agent_code").toString());
-		System.out.println("agentcode"+jsonreponse1.get("Admin_Sub_Agent_code").toString());
+		System.out.println("reponse"+jsonreponse);
+		
+		//String flag=jsonreponse.get("UserData").get("\"WalletHolder_Administrator_Partner_Flag_WAPn\"").toString
 		if (((JSONObject)jsonreponse.get("Status")).get("Code").toString().equals("0")  &&  ((JSONObject)jsonreponse.get("UserData")).get("WalletHolder_Administrator_Partner_Flag_WAPn").toString().equals("A")) {
 			
 	
-			
-			
-			
-			accountholder.setAdmin_Agent_code(jsonreponse1.get("Admin_Agent_code").toString());
-
-			System.out.println("admin_Agent_code account is: " + accountholder.getAdmin_Agent_code());
-			
-			accountholder.setAdmin_Agent_code(jsonreponse1.get("Admin_Sub_Agent_code").toString());
-			
-			System.out.println("admin_Agent_code account is: " + accountholder.getAdmin_Sub_Agent_code());
-			
-
-			
-			admin_Agent_code=jsonreponse1.get("Admin_Agent_code").toString();
-			admin_Sub_Agent_code=jsonreponse1.get("Admin_Sub_Agent_code").toString();
+//			accountholder.setAdmin_Agent_code(jsonreponse1.get("Admin_Agent_code").toString());
+//
+//			System.out.println("admin_Agent_code account is: " + accountholder.getAdmin_Agent_code());
+//			
+//			accountholder.setAdmin_Agent_code(jsonreponse1.get("Admin_Sub_Agent_code").toString());
+//			
+//			System.out.println("admin_Agent_code account is: " + accountholder.getAdmin_Sub_Agent_code());
+//			
+//
+//			
+//			admin_Agent_code=jsonreponse1.get("Admin_Agent_code").toString();
+//			admin_Sub_Agent_code=jsonreponse1.get("Admin_Sub_Agent_code").toString();
 			
 		
 	
@@ -105,67 +108,159 @@ public class AdminController {
 
 
 	
-	@RequestMapping(value = "/AccountList", method = RequestMethod.POST)
+	///////////////////////////////////////////////////////get user details////////////////////////////////////////
+	
+	@RequestMapping(value = "/Detail", method = RequestMethod.POST)
 	@ResponseBody
-	public String getcardholdersAPI(@ModelAttribute("accountholders") Accountholdersbean accountholdersbean, HttpServletRequest request, Model model)
-		throws SQLException, JSONException { 
-		String userData= null;
-		
-//    	System.out.println("Admin Agent code account is: " + admin_Agent_code);
-//	    System.out.println("Admin Sub Agent code account is: " + admin_Sub_Agent_code);
-//		JSONObject jsonResponse = new JSONObject();
-//		Accountholderlist getcardholdersAPI = new Accountholderlist();
-//		String response = getcardholdersAPI.getcardholdersAPI(admin_Agent_code,admin_Sub_Agent_code);
-//		System.out.println("res"+jsonResponse.getString("getcardholdersAPI"));
-//		JSONObject jsonreponse = new JSONObject(response);
-//		accountholder.getAdmin_Agent_code();
-//		System.out.println(((JSONObject)jsonreponse.get("Status")).get("Code").toString().equals("0"));
-		  if(admin_Agent_code == null) {
-			  
-			  msg = "Agent Code Required!";
-			  
-		  }else {
-			  Accountholderlist getcardholdersAPI = new Accountholderlist();
-			  JSONObject jsonResponse = new JSONObject();
-			  String response = getcardholdersAPI.getcardholdersAPI(admin_Agent_code,admin_Sub_Agent_code);
-			  
-			  
-			  
-			  
-			  if(response.contains("OK")) {
-				  
-				  
-				  JSONObject jsonResponse1 = new JSONObject(response);
-				   userData = jsonResponse1.get("user_data").toString();
-				  
-				  
-				  
-			
-				  
-			  }
-			  else {  
-				  msg = "Some internal error occurs there!";
-				  
-			  }
-			  
-		  }
-		    return userData.toString();
-	  }
-	
-	
-//	@RequestMapping(value = "/AccountList", method = RequestMethod.POST)
-//	@ResponseBody
-//	public String accountholder() throws JSONException {
-//		Map<String,String> param=new HashMap<String,String>();
-//		System.out.println("admin_Agent_code account is: " + accountholder.getAdmin_Agent_code());
-//		System.out.println("admin_Sub_Agent_code account is: " + accountholder.getAdmin_Sub_Agent_code());
-//		JSONObject jsonResponse = new JSONObject();
-//		Accountholderlist getcardholdersAPI = new Accountholderlist();
-//		String jsonResponse1 = getcardholdersAPI.getcardholdersAPI(admin_Agent_code,admin_Sub_Agent_code);
-//		 System.out.println("res"+jsonResponse.getString("AccountList"));
-//		return jsonResponse.getString("AccountList");
-//}
+	public String userdetails(@RequestParam("username") String username, Detailsbean Detailsbean,
+			HttpServletRequest request, Model model) throws Exception{
 
+		//String userdetails = username;
+		
+	
+
+		System.out.println("username is: " + username);
+
+		
+		//String currency = currencyType;
+
+		Details Details = new Details();
+		String response = Details.details(username );
+System.out.println("response"+response);
+
+JSONObject jsonResponse = new JSONObject(response);
+JSONObject UserData = jsonResponse.getJSONObject("user_details");
+
+Object id = UserData.getString("id");
+
+ModelAndView andView = new ModelAndView("kycupload");
+andView.addObject("id", id);
+//andView.addObject("", "");
+
+		return response;
+	}
+	
+//////////////////////////////////////////////////////kyc upload/////////////////////////////////////////
+	 @RequestMapping(value = "/kycupload", method = RequestMethod.POST)
+	  
+	  public ModelAndView uploadKycDocs(@ModelAttribute("uploadFiles") KYCFileUpload kycFileUpload ,  Model model,Detailsbean Detailsbean, HttpServletRequest servletRequest, String username) throws IOException, JSONException {
+		 //request.addParameter("username", null);
+	  System.out.println("Hello");
+
+	  
+	  String docType = null;
+  // String userdetails = username;
+		 username = Detailsbean.getusername();
+		//System.out.println("email in dashboard: " + email);
+		  System.out.println("username required for KYC docs upload is: " + username);
+	  
+	 // username u = new GetTribeMemberId();
+	  System.out.println("username is: " + username);
+	//Get the list of files
+     List<MultipartFile> files = kycFileUpload.getFiles();
+     List<String> fileNames = new ArrayList<String>();
+     List<String> docUId = new ArrayList<String>();
+
+     //Check whether the list is not null or empty
+     if (files != null && !files.get(0).getOriginalFilename().isEmpty())
+     {
+         //Get the individual MultipartFile
+         for (MultipartFile multipartFile : files)
+         {
+       	  
+       	  System.out.println("File name is: " + multipartFile.getOriginalFilename());
+				        	  
+       	  byte[] bytes = multipartFile.getBytes();
+       	  byte[] encoded = Base64.encodeBase64(bytes);
+       	  String encodedString = new String(encoded);
+       	  
+       	  //System.out.println("encoded string is: " + encodedString);  
+       	  
+       	  if(multipartFile.getOriginalFilename().contains("jpeg")) {
+       		  
+       		  
+       		  docType = "JPEG";
+       		  
+       	  }else if(multipartFile.getOriginalFilename().contains("png")) {
+       		  
+       		  docType = "PNG";
+       		  
+       	  }else if(multipartFile.getOriginalFilename().contains("pdf")) {
+       		  
+       		  docType = "PDF";
+       		  
+       	  }
+       	  
+       	  KYCDocumentUploadAPI kycDocumentUploadAPI = new KYCDocumentUploadAPI();
+       	  String response = kycDocumentUploadAPI.uploadKYCFile(encodedString, username, docType);
+       	  
+       	 System.out.println("KYC Document Upload Response in java class is: " + response); 
+       	 
+       	 JSONObject jsonResponse = new JSONObject(response);
+      	  	 String documentUid = jsonResponse.getString("DocumentUID");
+      	  
+      	  	 System.out.println("documentUid is: " + documentUid);
+     	  	 
+      	     docUId.add(documentUid);        	 
+        
+         }
+         
+     } 
+     else
+     {
+         //model.addAttribute("message", "Please select atleast one file!!");
+     }
+//	ModelAndView response = null;
+//	return response;
+     return new ModelAndView("kycupload");
+     
+     
+     
+     //Calling IDVCheck API
+     
+//   	GetISOCountryCode getISOCountryCode = new GetISOCountryCode();
+//	 	String isoCountryCode = getISOCountryCode.getISOCountryCodeAPI(countryId);
+//	
+//	 	IDVCheckAPI idvCheckAPI = new IDVCheckAPI();
+//	 	String idvCheckResponse = idvCheckAPI.kycIdvChcking(docUId, memberId, isoCountryCode, birthDate, firstname, aptNo, streetNo, street, city, state, postcode, lastName);
+//	 	
+//	 	System.out.println("idvCheck response is: " + idvCheckResponse);
+//	 	
+//	 	String insertUserCredResponse = insertUsercredentialsToDatabase.insertLoginCredentialsToEmailIndex(email, password);
+//		
+//		JSONObject json = new JSONObject(insertUserCredResponse);
+//		JSONObject UserData = json.getJSONObject("UserData");				
+//		kycUploadFlag = UserData.getString("KYC_Uploaded_Flag_Y");
+//	 	
+//   	servletRequest.setAttribute("email", email);
+//   	servletRequest.setAttribute("memberId", memberId);
+//   	servletRequest.setAttribute("kycUploadFlag", kycUploadFlag);
+//   	
+//   	accountInfo = getUserAccountsList.accountDetails(username);
+//   	System.out.println("accountInfo is: " + accountInfo);      
+//   	
+//   	
+//		//ModelAndView mv = new ModelAndView("index");
+//   	ModelAndView mv = new ModelAndView("redirect:mfaVerification");
+//		mv.addObject("name", name);
+//		mv.addObject("USDAccountBalance", USDAccountBalance);
+//		mv.addObject("accountInfo", accountInfo);
+//		return mv;
+  
+//		return mv;
+	  
+	  }
+	 
+	//////////////////////////////////////////////////////////////////////////////////////////////
+	 
+	 
+	 
+	 
+
+	//////////////////////////////////////////////////test/////////////////////////////////////////////
+
+	
+	  /////////////////////////////////////////////////////////////////////////////////
 }
 
 

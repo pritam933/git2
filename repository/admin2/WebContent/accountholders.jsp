@@ -761,7 +761,7 @@ document.addEventListener("click", closeAllSelect);
                                                     <button class="btn-wide btn btn-success">Copy</button>
                                                     <button class="btn-wide btn btn-success">Excel</button>
                                                     <button class="btn-wide btn btn-success" >Pdf</button>
-                                                    <button class="btn-wide btn btn-success"onclick="printJS({printable: base64, type: 'pdf', base64: true})">Print</button>
+                                                    <button class="btn-wide btn btn-success"onclick="window.print()">Print</button>
                                                 </div>
                                         
 
@@ -782,42 +782,89 @@ document.addEventListener("click", closeAllSelect);
                                         </div>
                                     </div>
                                     <div class="table-responsive">
-                                    <p style="color:#000; margin:10px" class="panel-money__title">Account Holders List <button type="submit" id ="accountlist" onclick="AccountsList();this.disabled=true;">View</button></p>	
+                                    <p style="color:#000; margin:10px" class="panel-money__title">Account Holders List <button type="submit" id ="text12" onclick="AccountsList();this.disabled=true;">View</button></p>	
                                         <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                                             <thead>
                                             <tr>
-                                                <th class="text-center" id="sln">			#           </th>
-                                                <th class="text-center" id="firstname"> First Name 		</th>
-                                                <th class="text-center" id="lastname"> Last Name  		</th>
-                                                <th class="text-center" id="memberid"> Member ID   		</th>
-                                                <th class="text-center" id="emailid"> Email ID    		</th>
-                                                <th class="text-center" id="cellphone"> Cell Phone 	    </th>
-                                                <th class="text-center" id="cardnumber"> Card Number 	</th>
-                                                <th class="text-center" id="cardtype"> Card Type   		</th>
-                                                <th class="text-center" id="phoneverify"> Phone Verify	</th>
-                                                <th class="text-center" id="kycupload"> KYC Upload  	</th>
-                                                <th class="text-center" id="agency">    Agency     		</th>
-                                                <th class="text-center" id="details">  Details    		</th>
+                                                <th class="text-center" id="abc">#           </th>
+                                                <th class="text-center"> First Name </th>
+                                                <th class="text-center"> Last Name  </th>
+                                                <th class="text-center">Member ID   </th>
+                                                <th class="text-center">Email ID    </th>
+                                                <th class="text-center">Cell Phone  </th>
+                                                <th class="text-center">Card Number </th>
+                                                <th class="text-center">Card Type   </th>
+                                                <th class="text-center">Phone Verify</th>
+                                                <th class="text-center">KYC Upload  </th>
+                                                <th class="text-center"> Agency     </th>
+                                                <th class="text-center"> Details    </th>
                                                  
                                                  
                                                 
                                   </tr>
                                </thead>
-                                        <tbody id="myTable">
-														 
-										</tbody>
-							  </table>
+                                         <tbody>
+							  
+									<tr>
+										<td></td>
+										<td  class="text-center">${Accountholdersbean.firstname}</td>
+										<td  class="text-center">${Accountholdersbean.lastname}</td>
+										<td  class="text-center">${Accountholdersbean.memberid}</td>
+										<td  class="text-center">${Accountholdersbean.emailid}</td>
+										<td  class="text-center">${Accountholdersbean.cellphone}</td>
+										<td  class="text-center">${Accountholdersbean.cardnumber}</td>
+										<td  class="text-center">${Accountholdersbean.cardtype}</td>
+										<td  class="text-center">${Accountholdersbean.Admin_Agent_code}</td>
+										<td  class="text-center">${Accountholdersbean.Admin_Sub_Agent_code}</td>
+										<td  class="text-center">${Accountholdersbean.agency}</td>
+										
+									</tr>
+							
+                                                <!-- <tr>
+                                                    <td class="text-center text-muted">#4</td>
+                                                    <td>
+                                                        <div class="widget-content p-0">
+                                                            <div class="widget-content-wrapper">
+                                                                <div class="widget-content-left mr-3">
+                                                                    <div class="widget-content-left">
+                                                                        <img width="40" class="rounded-circle" src="assets/images/avatars/.jpg" alt=""></div>
+                                                                </div>
+                                                                <div class="widget-content-left flex2">
+                                                                    <div class="widget-heading">User 4</div>
+                                                                    <div class="widget-subheading opacity-7">StyloPay</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center">25123</td>
+                                                    <td class="text-center">
+                                                        <div class="badge badge-danger">On Hold</div>
+                                                    </td>
+                                                    <td class="text-center">RSI</td>
+                                                    <td class="text-center"> 41466161496</td>
+                                                    <td class="text-center">no</td>
+                                                    <td class="text-center">
+                                                        <div class="mb-2 mr-2 dropleft btn-group">
+                                                            <button class="btn-wide btn btn-primary">Details</button>
+                                                            <button type="button" aria-haspopup="true" aria-expanded="false" data-toggle="dropdown" class="dropdown-toggle-split dropdown-toggle btn btn-primary"><span class="sr-only">Toggle Dropdown</span></button>
+                                                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu">
+                                                                <button type="button" tabindex="0" class="dropdown-item">User Infromation</button>
+                                                                <button type="button" tabindex="0" class="dropdown-item">Status</button>
+                                                                -<h6 tabindex="-1" class="dropdown-header">Header</h6>-
+                                                                <button type="button" tabindex="0" class="dropdown-item">Balance</button>
+                                                                <div tabindex="-1" class="dropdown-divider"></div>
+                                                                <button type="button" tabindex="0" class="dropdown-item">Edit User
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                                 
+                                                        </td>
+                                                </tr> -->
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                 <!--    <div class="col-lg-12 col-md-6 col-xs-12">
-											<div class ="row">
-											    <div class="col-lg-6 col-md-2 col-xs-6">
-												<button class="col-lg-8 col-xs-8 bgColor" id="PreValue">Previous</button>
-												</div>
-												<div class="col-lg-6  col-md-2 col-xs-6">
-												<button class="col-lg-8 col-xs-8 bgColor" id="nextValue">Next</button>
-												</div>	
-											</div>
-											</div> -->
+                                    
                                 </div>
                             </div>
                         </div>
@@ -877,8 +924,5 @@ document.addEventListener("click", closeAllSelect);
      <script type="text/javascript"> 
     </script> 
                                                     
-    <script type="text/javascript" src="assets/scripts/dashboard.js"></script>
-     <script type="text/javascript" src="assets/scripts/accountholders.js"></script>
-     <script type="text/javascript" src="assets/scripts/jquery.min.js"></script>
-    </body>
+    <script type="text/javascript" src="assets/scripts/dashboard.js"></script></body>
 </html>
